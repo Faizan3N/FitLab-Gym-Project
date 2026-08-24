@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import './style.css';
 
-function LoginModal() {
+function LoginModal({ onSwitch }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -89,8 +89,7 @@ function LoginModal() {
             </button>
 
             <div className="form-footer">
-                <p>Don't have an account? <a href="#signup">Sign up</a></p>
-                <a href="#forgot-password" className="forgot-password">Forgot your password?</a>
+                <p>Don't have an account? <a href="#signup" onClick={(e) => { e.preventDefault(); onSwitch?.(); }}>Register</a></p>
             </div>
             </form>
     );

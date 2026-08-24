@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import './style.css';
 
-function SignupModal() {
+function SignupModal({ onSwitch }) {
     // State variables to hold user input
     const [name, setName] = useState('');  // State to store the user's name
     const [email, setEmail] = useState('');  // State to store the user's email
@@ -200,7 +200,7 @@ function SignupModal() {
             </button>
 
             <div className="form-footer">
-                <p>Already have an account? <a href="#login">Log in</a></p>
+                <p>Already a member? <a href="#login" onClick={(e) => { e.preventDefault(); onSwitch?.(); }}>Log in</a></p>
             </div>
         </form>
     );

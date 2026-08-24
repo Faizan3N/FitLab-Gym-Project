@@ -1,102 +1,106 @@
 import React from 'react';
-import './style.css';
+import { Link } from 'react-router-dom';
+
+const plans = [
+  {
+    index: '01',
+    name: 'Basic',
+    price: '29',
+    note: 'Open-floor membership',
+    features: [
+      'Strength and cardio floors',
+      'Locker and changing rooms',
+      'Two group classes each month',
+      'Complimentary fitness assessment',
+      'Members’ lounge access'
+    ],
+    isPopular: false
+  },
+  {
+    index: '02',
+    name: 'Premium',
+    price: '59',
+    note: 'The club standard',
+    features: [
+      'Full club access, 06:00–22:00',
+      'Unlimited group classes',
+      'Two personal training sessions',
+      'Nutrition consultation',
+      'Priority class booking',
+      'One guest pass each month'
+    ],
+    isPopular: true
+  },
+  {
+    index: '03',
+    name: 'Elite',
+    price: '99',
+    note: 'Private coaching retained',
+    features: [
+      'All Premium privileges',
+      'Four personal training sessions',
+      'Monthly body composition review',
+      'Custom meal planning',
+      'Recovery session credits',
+      'Four guest visits each month'
+    ],
+    isPopular: false
+  }
+];
 
 function Pricing() {
-  const plans = [
-    {
-      name: 'Basic',
-      price: '29',
-      duration: 'month',
-      features: [
-        'Access to gym facilities',
-        'Basic equipment usage',
-        'Locker room access',
-        '2 Group classes per month',
-        'Fitness assessment'
-      ],
-      isPopular: false
-    },
-    {
-      name: 'Premium',
-      price: '59',
-      duration: 'month',
-      features: [
-        'Full gym access 24/7',
-        'All equipment access',
-        'Unlimited group classes',
-        'Personal trainer (2 sessions)',
-        'Nutrition consultation',
-        'Access to mobile app',
-        'Free parking'
-      ],
-      isPopular: true
-    },
-    {
-      name: 'Elite',
-      price: '99',
-      duration: 'month',
-      features: [
-        'All Premium features',
-        'Personal trainer (4 sessions)',
-        'Monthly body analysis',
-        'Custom meal plans',
-        'Recovery sessions',
-        'Bring a friend (4 times/month)',
-        'Priority booking'
-      ],
-      isPopular: false
-    }
-  ];
-
   return (
-    <section id="pricing" className="pricing-section">
+    <section id="pricing" className="section pricing-section">
       <div className="container">
-        <h2 className="section-title">Membership Plans</h2>
-        <p className="section-subtitle">
-          Choose the perfect plan for your fitness journey
-        </p>
+        <div className="section-intro centered">
+          <p className="eyebrow">Membership</p>
+          <h2 className="section-heading">Club rates, written plainly.</h2>
+          <p className="section-lead">
+            Seven-day trial on every plan. Pause or cancel with thirty days’ written notice.
+            No joining fee. No hidden levies.
+          </p>
+        </div>
 
         <div className="pricing-grid">
-          {plans.map((plan, index) => (
-            <div 
-              key={index} 
+          {plans.map((plan) => (
+            <article
+              key={plan.name}
               className={`pricing-card ${plan.isPopular ? 'popular' : ''}`}
             >
-              {plan.isPopular && (
-                <div className="popular-tag">Most Popular</div>
-              )}
-              <div className="pricing-header">
+              {plan.isPopular && <span className="popular-tag">Most selected</span>}
+              <header className="pricing-header">
+                <span className="plan-index">{plan.index}</span>
                 <h3>{plan.name}</h3>
-                <div className="price">
-                  <span className="currency">$</span>
-                  <span className="amount">{plan.price}</span>
-                  <span className="duration">/{plan.duration}</span>
-                </div>
+                <p className="plan-note">{plan.note}</p>
+              </header>
+              <div className="price">
+                <span className="currency">USD</span>
+                <span className="amount">{plan.price}</span>
+                <span className="duration">billed monthly</span>
               </div>
-              <div className="pricing-features">
-                <ul>
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx}>
-                      <span className="feature-icon">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <button className={`register-btn ${plan.isPopular ? 'btn-primary' : 'btn-outline'}`}>
-                Choose Plan
-              </button>
-            </div>
+              <ul className="pricing-features">
+                {plan.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
+              </ul>
+              <Link
+                to="/subscription"
+                className={`btn ${plan.isPopular ? 'btn-gold' : 'btn-outline'}`}
+              >
+                Select {plan.name}
+              </Link>
+            </article>
           ))}
         </div>
 
-        <div className="pricing-note">
-          <p>* All plans include a free 7-day trial period</p>
-          <p>* No long-term contracts, cancel anytime</p>
+        <div className="pricing-assurances">
+          <p>Seven-day complimentary trial</p>
+          <p>Cancel with 30 days’ notice</p>
+          <p>Secure card payment at subscription</p>
         </div>
       </div>
     </section>
   );
 }
 
-export default Pricing; 
+export default Pricing;

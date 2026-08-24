@@ -58,13 +58,13 @@ function TrainerRegistrationModal({ show, onClose }) {
   if (!show) return null;
 
   return (
-    <div className="modal-overlay active">
-      <div className="modal-content active">
-        <button className="modal-close" onClick={onClose}>×</button>
+    <div className="modal-overlay active" onClick={onClose}>
+      <div className="modal-content active" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
         
         <div className="modal-header">
-          <h2 className="modal-title">Trainer Registration</h2>
-          <p className="modal-subtitle">Register as a trainer at FitLab</p>
+          <h2 className="modal-title">Coach registration</h2>
+          <p className="modal-subtitle">Apply to join the FitLab coaching faculty.</p>
         </div>
 
         <div className="modal-body">

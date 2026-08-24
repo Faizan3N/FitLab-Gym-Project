@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './style.css';
 
 function WorkoutPlanModal({ show, onClose }) {
   const [formData, setFormData] = useState({
@@ -9,9 +8,15 @@ function WorkoutPlanModal({ show, onClose }) {
     duration: '',
     goal: ''
   });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError('');
+    setSuccess('');
     try {
       const response = await fetch('http://localhost:6161/api/workout-plans', {
         method: 'POST',
@@ -22,15 +27,17 @@ function WorkoutPlanModal({ show, onClose }) {
       });
 
       if (response.ok) {
-        alert('Workout plan created successfully!');
-        onClose();
+        setSuccess('Workout plan created successfully.');
+        setFormData({ memberId: '', trainerId: '', exerciseList: '', duration: '', goal: '' });
+        setTimeout(onClose, 1500);
       } else {
         const data = await response.json();
-        alert(data.message || 'Error creating workout plan');
+        setError(data.message || 'Unable to create the workout plan.');
       }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error creating workout plan');
+    } catch (err) {
+      setError('Unable to create the workout plan. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,17 +51,19 @@ function WorkoutPlanModal({ show, onClose }) {
   if (!show) return null;
 
   return (
-    <div className="modal-overlay active">
-      <div className="modal-content active">
-        <button className="modal-close" onClick={onClose}>×</button>
+    <div className="modal-overlay active" onClick={onClose}>
+      <div className="modal-content active" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
         
         <div className="modal-header">
-          <h2 className="modal-title">Create Workout Plan</h2>
-          <p className="modal-subtitle">Design a personalized workout plan</p>
+          <h2 className="modal-title">Workout plan</h2>
+          <p className="modal-subtitle">Assign a programmed plan to a member.</p>
         </div>
 
         <div className="modal-body">
           <form onSubmit={handleSubmit}>
+            {success && <div className="form-success">{success}</div>}
+            {error && <div className="form-error">{error}</div>}
             <div className="form-group">
               <label htmlFor="memberId" className="form-label">Member ID</label>
               <input
@@ -92,7 +101,7 @@ function WorkoutPlanModal({ show, onClose }) {
                 placeholder="Enter exercises (one per line)"
                 value={formData.exerciseList}
                 onChange={handleChange}
-                rows="4"
+                rows="3"
                 required
               />
             </div>
@@ -133,8 +142,8 @@ function WorkoutPlanModal({ show, onClose }) {
               </select>
             </div>
 
-            <button type="submit" className="form-submit">
-              Create Plan
+            <button type="submit" className="form-submit" disabled={isLoading}>
+              {isLoading ? 'Saving…' : 'Create plan'}
             </button>
           </form>
         </div>

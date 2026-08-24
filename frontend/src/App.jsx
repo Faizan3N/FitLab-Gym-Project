@@ -1,19 +1,37 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navbar from './Navbar';
 import Welcome from './Welcome';
 import About from './About';
+import Facilities from './Facilities';
+import Classes from './Classes';
+import Trainers from './Trainers';
 import Pricing from './Pricing';
-
-import SignupModal from './SignupModal';
-import AttendanceModal from './AttendanceModal';
-import TrainerRegistrationModal from './TrainerRegistrationModal';
-import WorkoutPlanModal from './WorkoutPlanModal';
-import SubscriptionModal from './SubscriptionModal';
+import Testimonials from './Testimonials';
+import Gallery from './Gallery';
+import FAQ from './FAQ';
+import Contact from './Contact';
+import Footer from './Footer';
 
 import './style.css';
+
+function HomePage() {
+  return (
+    <main>
+      <Welcome />
+      <About />
+      <Facilities />
+      <Classes />
+      <Trainers />
+      <Pricing />
+      <Testimonials />
+      <Gallery />
+      <FAQ />
+      <Contact />
+    </main>
+  );
+}
 
 function App() {
   return (
@@ -21,20 +39,14 @@ function App() {
       <div className="app">
         <Navbar />
         <Routes>
-          <Route path="/" element={
-            <>
-              <Welcome />
-              <About />
-              <Pricing />
-            </>
-          }></Route>
-
-          <Route path="/registration" element={<SignupModal />}></Route>
-          <Route path="/attendance" element={<AttendanceModal />}></Route>
-          <Route path="/trainer" element={<TrainerRegistrationModal />}></Route>
-          <Route path="/workout-plan" element={<WorkoutPlanModal />}></Route>
-          <Route path="/subscription" element={<SubscriptionModal />}></Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/registration" element={<HomePage />} />
+          <Route path="/attendance" element={<HomePage />} />
+          <Route path="/trainer" element={<HomePage />} />
+          <Route path="/workout-plan" element={<HomePage />} />
+          <Route path="/subscription" element={<HomePage />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

@@ -50,13 +50,13 @@ function AttendanceModal({ show, onClose }) {
   if (!show) return null;
 
   return (
-    <div className="modal-overlay active">
-      <div className="modal-content active">
-        <button className="modal-close" onClick={onClose}>×</button>
+    <div className="modal-overlay active" onClick={onClose}>
+      <div className="modal-content active" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
 
         <div className="modal-header">
-          <h2 className="modal-title">Attendance Tracking</h2>
-          <p className="modal-subtitle">Record member check-in/check-out</p>
+          <h2 className="modal-title">Attendance</h2>
+          <p className="modal-subtitle">Record member check-in and check-out.</p>
         </div>
 
         <div className="modal-body">

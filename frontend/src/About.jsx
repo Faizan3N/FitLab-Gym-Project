@@ -1,42 +1,46 @@
 import React from 'react';
-import './style.css';
+import { Link } from 'react-router-dom';
 
 function About() {
   return (
-    <section id="about" className="about-section">
-      <div className="container">
-        <h2 className="section-title">Why Choose Us?</h2>
-        
-        <div className="features-grid">
-          <div className="feature-card">
-            <div className="feature-icon">🏋️‍♂️</div>
-            <h3>Modern & Clean Facilities</h3>
-            <p>Our gym is equipped with spotless interiors, air-conditioned workout areas, and hygienic locker rooms — all designed to keep you comfortable and focused on your goals.</p>
-          </div>
-          
-          <div className="feature-card">
-            <div className="feature-icon">⚙️</div>
-            <h3>Professional-Grade Equipment</h3>
-            <p>We feature the latest strength, cardio, and functional training equipment from leading fitness brands to ensure safety, efficiency, and variety in every workout.</p>
-          </div>
-          
-          <div className="feature-card">
-            <div className="feature-icon">💪</div>
-            <h3>Personal Training Options</h3>
-            <p>Work one-on-one with certified personal trainers who will design custom programs based on your needs — whether it's weight loss, muscle gain, or improved performance.</p>
+    <section id="about" className="section about-section">
+      <div className="container about-grid">
+        <div className="about-media">
+          <img
+            src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=80"
+            alt="FitLab strength training floor"
+          />
+          <div className="about-badge">
+            <strong>6 years</strong>
+            <span>serving Lahore athletes</span>
           </div>
         </div>
 
-        <div className="about-content">
-          <div className="about-text text-center">
-            <h3>Your Fitness Journey Begins at FitLab</h3>
-            <p>At FitLab, we're more than just a gym, we're your partners in health, strength, and transformation. Whether you're a beginner or an experienced athlete, our goal is to help you become the best version of yourself, both physically and mentally.</p>
-            <button className="register-btn">START FREE TRIAL</button>
-          </div>
+        <div className="about-copy">
+          <p className="eyebrow">The Club</p>
+          <h2 className="section-heading">A private training house, not a crowded gym.</h2>
+          <p className="lede">
+            FitLab was founded for people who treat training as a professional habit — executives,
+            athletes, and members who expect order, hygiene, and coaching of a higher standard.
+          </p>
+          <p>
+            Our floor is programmed, not packed. Equipment is commercial-grade and maintained daily.
+            Coaches work from assessments, not guesswork. Whether the goal is strength, physique,
+            or longevity, the method is the same: structured training in a composed environment.
+          </p>
+
+          <ul className="about-points">
+            <li>Member capacity is limited to protect floor quality</li>
+            <li>Daily sanitisation of stations, studios, and changing rooms</li>
+            <li>Certified coaches for strength, conditioning, and mobility</li>
+            <li>Complimentary fitness assessment with every new membership</li>
+          </ul>
+
+          <Link to="/registration" className="btn btn-gold">Begin Membership</Link>
         </div>
       </div>
     </section>
   );
 }
 
-export default About; 
+export default About;

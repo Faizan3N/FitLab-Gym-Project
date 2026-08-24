@@ -54,13 +54,13 @@ function SubscriptionModal({ show, onClose }) {
   if (!show) return null;
 
   return (
-    <div className="modal-overlay active">
-      <div className="modal-content active">
-        <button className="modal-close" onClick={onClose}>×</button>
+    <div className="modal-overlay active" onClick={onClose}>
+      <div className="modal-content active" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
         
         <div className="modal-header">
-          <h2 className="modal-title">Subscription</h2>
-          <p className="modal-subtitle">Choose your membership plan</p>
+          <h2 className="modal-title">Membership subscription</h2>
+          <p className="modal-subtitle">Select a plan and complete payment details.</p>
         </div>
 
         <div className="modal-body">
